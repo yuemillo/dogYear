@@ -1,0 +1,62 @@
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background: #fff6e9;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.dog-age-wrapper {
+  background: white;
+  padding: 25px;
+  width: 320px;
+  border-radius: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  border: 3px solid #ffe1b3;
+}
+
+.dog-age-wrapper h2 {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+input[type="date"] {
+  width: 92%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #ffcf91;
+  background: #fff8ee;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: #ffb347;
+  border-radius: 12px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #ff9f1c;
+}
+
+.result-box {
+  margin-top: 20px;
+  background: #fff3d4;
+  padding: 15px;
+  border-radius: 12px;
+  border: 2px solid #ffe7b8;
+  font-size: 15px;
+  line-height: 1.6;
+}

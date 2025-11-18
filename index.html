@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>狗狗的年齡計算器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dog-age-wrapper">
+    <h1>🐶 妙麗歲數計算機</h1>
+
+    <label for="birthday">狗狗的出生日期：</label>
+    <input type="date" id="birthday">
+    <button id="calculateBtn">開始計算</button>
+
+    <div id="result" class="result-box"></div>
+    </div>
+</body>
+
+<script>
+// --- 1. 頁面載入先讀取 LocalStorage 中的生日與結果（← 修改） ---
+window.addEventListener("DOMContentLoaded", () => {
+  const savedBirthday = localStorage.getItem("dogBirthday");
+  const savedResult = localStorage.getItem("dogResult");   // ← 新增
+
+  if (savedBirthday) {
+    document.getElementById("birthday").value = savedBirthday;
+  }
+
+  // 如果有儲存結果，自動顯示（← 新增）
+  if (savedResult) {
+    document.getElementById("result").innerHTML = savedResult;
+  }
+});
+
+// --- 2. 計算狗狗年齡 ---
+function calculateDogAge(birthday) {
+  const birth = new Date(birthday);
+  const now = new Date();
+  const diffTime = now - birth;
+  return diffTime / (1000 * 60 * 60 * 24 * 365.25);
+}
+
+// --- 3. 轉換成人類年齡 ---
+function convertToHumanAge(dogYears) {
+  if (dogYears < 1) {
+    return dogYears * 15; // 幼犬期
+  } else if (dogYears < 2) {
+    return 15 + (dogYears - 1) * 9;
+  } else {
+    return 16 * Math.log(dogYears) + 31; // 科學公式
+  }
+}
+
+// --- 4. 按下按鈕執行 ---
+document.getElementById("calculateBtn").addEventListener("click", () => {
+  const birthday = document.getElementById("birthday").value;
+  const resultBox = document.getElementById("result");
+
+  if (!birthday) {
+    resultBox.innerHTML = "請先輸入狗狗的生日喔！🐶💛";
+    return;
+  }
+
+  // 儲存生日到 LocalStorage（← 修改）
+  localStorage.setItem("dogBirthday", birthday);
+
+  const dogAge = calculateDogAge(birthday);
+  const humanAge = convertToHumanAge(dogAge);
+
+  const resultHTML = `
+    🐾 狗狗現在大約 <b>${dogAge.toFixed(1)}</b> 歲狗年齡<br>
+    🧡 換算成人類大約是 <b>${humanAge.toFixed(1)}</b> 歲
+  `;
+
+  resultBox.innerHTML = resultHTML;
+
+  // --- 儲存計算結果到 LocalStorage（← 新增） ---
+  localStorage.setItem("dogResult", resultHTML);
+});
+
+</script>
+</html>
